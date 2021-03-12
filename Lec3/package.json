@@ -1,0 +1,15 @@
+{
+  "name": "Lec3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wCat.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "cat": "wCat.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
