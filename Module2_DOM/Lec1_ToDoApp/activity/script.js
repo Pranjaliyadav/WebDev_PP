@@ -38,7 +38,7 @@ function addToDo(){
         deleteButton.addEventListener("click" , function(event){
             console.log("delete todo clicked !!!");
             console.log(event);
-            event.target.parentNode.remove();
+            event.target.parentNode.remove();  //this deletes 
         });
 
         //now add these tags to list elemnt
@@ -49,6 +49,9 @@ function addToDo(){
         todoList.append(listItem);
         todoInput.value = "";
 
+    }
+    else{
+        alert("You haven't entered any todo !!!");
     }
 }
 
