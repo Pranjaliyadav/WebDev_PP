@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index DB Demo</title>
+
+    
+</head>
+<body>
+   <div>
+       Database Name <input id="database-name" type="text">
+       Version <input id="database-version" type="text">
+       <button id="openDB">Open Database</button>
+   </div>
+
+   <div>
+       mid <input id="media-id" type="text">
+       type <input id="media-type" type="text">
+       <button id="addMedia">Add Media</button>
+   </div>
+
+   <button id="showMedia">Show Media</button>
+
+    <script>
+        let db;
+
+        let dbName = document.querySelector("#database-name");
+        let dbVersion = document.querySelector("#database-version");
+        let openDBBtn = document.querySelector("#openDB");
+
+        let mid = document.querySelector("#media-id");
+        let mediaType = document.querySelector("#media-type");
+        let addMediaBtn = document.querySelector("#addMedia");
+        
+        let showMediaBtn = document.querySelector("#showMedia");
+
+        openDBBtn.addEventListener("click" , openDB);
+        addMediaBtn.addEventListener("click" , addMedia);
+        showMediaBtn.addEventListener("click" , showMedia);
+        
+        function addMedia(){
+            let txn = db.transaction("Media" , "readwrite");
+            
+            let mediaStore = txn.objectStore("Media");
+            
+            mediaStore.add({mid:mid.value , type:mediaType.value});
+
+            // console.log(txn);
+            txn.onerror = function(e){
+                console.log("txn failed !!");
+                console.log(e);
+            }
+        }
+        
+        function showMedia(){
+            let txn = db.transaction("Media" , "readonly");
+            let mediaStore = txn.objectStore("Media");
+
+            let cursorObject = mediaStore.openCursor();
+            
+            cursorObject.onsuccess = function(e){                
+                let cursor = cursorObject.result;
+                if(cursor){
+                    console.log(cursor.value);
+                    cursor.continue();
+                }
+            }
+
+        }
+      
+
+        function openDB(){
+            // db open // create db
+            // console.log(dbName.value , dbVersion.value);
+            let dbRequest = indexedDB.open( dbName.value  , dbVersion.value);
+            
+            dbRequest.onupgradeneeded = function(e){
+                alert("In Upgrade Event");
+                // console.log(e);
+                db = e.target.result;
+                let mediaTable = db.createObjectStore("Media" , {keyPath : "mid"});
+            }
+            
+            dbRequest.onsuccess = function(e){
+                alert("In Success Event");
+                db = e.target.result;
+                console.log(db);
+            };
+            
+            dbRequest.onerror = function(e){
+                alert("In Error Event !");
+                console.log(e);
+            }
+        }
+    </script>
+</body>
+</html>
