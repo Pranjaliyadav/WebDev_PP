@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
 class Pagination extends Component {
-    state = {  }
-    render() { 
-        return ( 
-            <nav>
+  state = {};
+
+  render() {
+    return (
+      <nav>
         <ul className="pagination justify-content-center">
-          {this.props.currPage === 1 ? (
+          {this.props.currPage == 1 ? (
             <li className="page-item disabled">
               <a className="page-link" aria-disabled="true">
                 Previous
@@ -50,8 +51,8 @@ class Pagination extends Component {
           )}
         </ul>
       </nav>
-         );
-    }
+    );
+  }
 }
- 
+
 export default Pagination;
