@@ -1,15 +1,15 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 
-var firebaseConfig = {
-    apiKey: "AIzaSyAnNyHEK4NId3BQ5IJCiB7Op-5y67qxWV4",
-    authDomain: "react-login-f3252.firebaseapp.com",
-    projectId: "react-login-f3252",
-    storageBucket: "react-login-f3252.appspot.com",
-    messagingSenderId: "764794385894",
-    appId: "1:764794385894:web:9f738cbeed429d957e1227"
-  };
+import "firebase/auth";
 
-let firebaseApp = firebase.initializeApp(firebaseConfig);
-let firebaseAuth = firebaseApp.auth();
+const app = firebase.initializeApp({
+    apiKey: "AIzaSyALV2b7wwhHk1NHbFwQXAH_P820i8Y7jtk",
+    authDomain: "auth-development-77270.firebaseapp.com",
+    projectId: "auth-development-77270",
+    storageBucket: "auth-development-77270.appspot.com",
+    messagingSenderId: "720853369302",
+    appId: "1:720853369302:web:0dae6625fc55584ce2a477"
+})
 
-export default firebaseAuth;
+export const auth = app.auth();
+export default app;
