@@ -17,6 +17,7 @@ function App() {
         </Route>
         <Route path="/documents/:id">
           <TextEditor></TextEditor>
+          
         </Route>
       </Switch>
     </Router>
