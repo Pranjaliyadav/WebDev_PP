@@ -42,6 +42,12 @@ app.delete("/user",function(req,res){
     user = {};
     res.status(200).json(user);
 })
+
+//template routes
+app.get("/user/:id",function(req,res){
+    console.log(req.params,req.params.id);
+    res.status(200).send("Hello");
+})
 //localhost:8080 ??
 app.listen(3000,function(){
 console.log("server started");
